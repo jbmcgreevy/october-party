@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emma & Jared's Wedding Celebration</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #fdf8f0;
+      --blush: #d4a5a5;
+      --rose: #a05c5c;
+      --sage: #7a9e7e;
+      --dark: #3a2e2e;
+      --light-text: #6b5b5b;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--cream);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(160deg, #ecdede 0%, #f7efe6 50%, #e8ede8 100%);
+      text-align: center;
+      padding: 80px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before, .hero::after {
+      content: '✦';
+      position: absolute;
+      font-size: 120px;
+      color: rgba(212, 165, 165, 0.15);
+      top: 20px;
+    }
+    .hero::before { left: -20px; }
+    .hero::after  { right: -20px; }
+
+    .hero .eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      color: var(--rose);
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 8vw, 5rem);
+      color: var(--dark);
+      line-height: 1.15;
+    }
+
+    .hero h1 span {
+      color: var(--rose);
+    }
+
+    .hero .subtitle {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--light-text);
+      margin-top: 16px;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: center;
+      margin: 32px auto;
+      max-width: 320px;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--blush);
+    }
+    .divider span { color: var(--blush); font-size: 1.1rem; }
+
+    /* ── Details band ── */
+    .details-band {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+      background: var(--rose);
+      color: #fff;
+    }
+
+    .detail-item {
+      flex: 1 1 200px;
+      padding: 28px 32px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.2);
+    }
+    .detail-item:last-child { border-right: none; }
+
+    .detail-item .icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .detail-item .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-bottom: 4px;
+    }
+    .detail-item .value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+    }
+    .detail-item .value a {
+      color: #fff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ── Sections ── */
+    .section {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 24px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--rose);
+      margin-bottom: 6px;
+    }
+
+    .section-subtitle {
+      color: var(--light-text);
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+    }
+
+    /* ── Card grid ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(58,46,46,0.07);
+      border-top: 3px solid var(--blush);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(58,46,46,0.12);
+    }
+
+    .card .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .card .card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--cream);
+      color: var(--rose);
+      border: 1px solid var(--blush);
+      border-radius: 20px;
+      padding: 2px 10px;
+      margin-bottom: 10px;
+    }
+
+    .card .card-desc {
+      font-size: 0.9rem;
+      color: var(--light-text);
+    }
+
+    .card .card-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--sage);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .card .card-link:hover { text-decoration: underline; }
+
+    /* ── Activities use accent color ── */
+    .card.activity { border-top-color: var(--sage); }
+    .card.activity .card-tag { color: var(--sage); border-color: var(--sage); }
+    .card.activity .card-link { color: var(--rose); }
+
+    /* ── Note box ── */
+    .note {
+      background: #fff;
+      border-left: 4px solid var(--blush);
+      border-radius: 8px;
+      padding: 20px 24px;
+      color: var(--light-text);
+      font-style: italic;
+      margin-bottom: 40px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.85rem;
+    }
+    footer strong { color: #fff; }
+
+    @media (max-width: 600px) {
+      .detail-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+      .detail-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <header class="hero">
+    <p class="eyebrow">You're invited to celebrate</p>
+    <h1>Emma <span>&</span> Jared</h1>
+    <p class="subtitle">We eloped — now let's party.</p>
+    <div class="divider"><span>♡</span></div>
+    <p style="color: var(--light-text); max-width: 480px; margin: 0 auto; font-size: 1rem;">
+      We snuck off and got married on March 6th, and we can't wait to celebrate
+      with all of you this fall in St. Louis!
+    </p>
+  </header>
+
+  <!-- Details band -->
+  <div class="details-band">
+    <div class="detail-item">
+      <div class="icon">📅</div>
+      <div class="label">Date</div>
+      <div class="value">October 17th, 2026</div>
+    </div>
+    <div class="detail-item">
+      <div class="icon">🕒</div>
+      <div class="label">Time</div>
+      <div class="value">3:00 – 9:00 PM</div>
+    </div>
+    <div class="detail-item">
+      <div class="icon">📍</div>
+      <div class="label">Location</div>
+      <div class="value">
+        <a href="https://maps.google.com/?q=6411+Blow+Street,+St.+Louis+MO+63109" target="_blank" rel="noopener">
+          6411 Blow Street<br>St. Louis, MO 63109
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hotels -->
+  <section class="section">
+    <h2 class="section-title">Places to Stay</h2>
+    <p class="section-subtitle">Some great hotel options around St. Louis for out-of-town guests.</p>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-name">The Cheshire</div>
+        <div class="card-tag">Boutique · Clayton</div>
+        <p class="card-desc">A charming English-inspired boutique hotel in the upscale Clayton neighborhood, about 15 min from the party.</p>
+        <a class="card-link" href="https://www.thecheshirestl.com" target="_blank" rel="noopener">cheshirestl.com →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-name">Moonrise Hotel</div>
+        <div class="card-tag">Boutique · The Loop</div>
+        <p class="card-desc">A funky, moon-themed hotel in the lively Delmar Loop area. Great walkable dining and nightlife nearby.</p>
+        <a class="card-link" href="https://www.moonrisehotel.com" target="_blank" rel="noopener">moonrisehotel.com →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-name">Angad Arts Hotel</div>
+        <div class="card-tag">Boutique · Grand Center</div>
+        <p class="card-desc">A colorful, arts-district hotel where each floor has its own mood. Unique and memorable stay.</p>
+        <a class="card-link" href="https://www.angadartshotel.com" target="_blank" rel="noopener">angadartshotel.com →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-name">21c Museum Hotel</div>
+        <div class="card-tag">Art Hotel · Downtown</div>
+        <p class="card-desc">A contemporary art museum and hotel in one. Stunning installations throughout and a great restaurant on-site.</p>
+        <a class="card-link" href="https://www.21cmuseumhotels.com/stlouis" target="_blank" rel="noopener">21cmuseumhotels.com →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-name">Marriott St. Louis Grand</div>
+        <div class="card-tag">Full-Service · Downtown</div>
+        <p class="card-desc">A classic full-service downtown hotel, steps from the Gateway Arch and plenty of dining options.</p>
+        <a class="card-link" href="https://www.marriott.com" target="_blank" rel="noopener">marriott.com →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-name">Drury Inn – Convention Center</div>
+        <div class="card-tag">Value · Downtown</div>
+        <p class="card-desc">A reliably comfortable mid-range option downtown. Includes free hot breakfast and evening snacks — a great deal.</p>
+        <a class="card-link" href="https://www.druryhotels.com" target="_blank" rel="noopener">druryhotels.com →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Things to Do -->
+  <section class="section">
+    <h2 class="section-title">Things to Do in St. Louis</h2>
+    <p class="section-subtitle">Make a weekend of it — there's plenty to explore before or after the party.</p>
+
+    <div class="note">
+      The party is right near <strong>Tower Grove Park</strong> and the <strong>Missouri Botanical Garden</strong> — both are beautiful in October and worth a morning stroll.
+    </div>
+
+    <div class="card-grid">
+
+      <div class="card activity">
+        <div class="card-name">Gateway Arch</div>
+        <div class="card-tag">Landmark · Free to visit</div>
+        <p class="card-desc">Ride to the top of the iconic 630-foot arch for sweeping views of the Mississippi River and St. Louis skyline.</p>
+        <a class="card-link" href="https://www.gatewayarch.com" target="_blank" rel="noopener">gatewayarch.com →</a>
+      </div>
+
+      <div class="card activity">
+        <div class="card-name">Missouri Botanical Garden</div>
+        <div class="card-tag">Nature · Near the party</div>
+        <p class="card-desc">One of the top botanical gardens in the country. Stunning in fall foliage. 5 min from the party venue.</p>
+        <a class="card-link" href="https://www.missouribotanicalgarden.org" target="_blank" rel="noopener">missouribotanicalgarden.org →</a>
+      </div>
+
+      <div class="card activity">
+        <div class="card-name">City Museum</div>
+        <div class="card-tag">Unique · All Ages</div>
+        <p class="card-desc">Part playground, part art installation, part madhouse — there's nothing else like it. Adults love it as much as kids.</p>
+        <a class="card-link" href="https://www.citymuseum.org" target="_blank" rel="noopener">citymuseum.org →</a>
+      </div>
+
+      <div class="card activity">
+        <div class="card-name">St. Louis Zoo</div>
+        <div class="card-tag">Family · Free Admission</div>
+        <p class="card-desc">One of the best free zoos in the country, located in Forest Park. A full day's worth of wildlife to explore.</p>
+        <a class="card-link" href="https://www.stlzoo.org" target="_blank" rel="noopener">stlzoo.org →</a>
+      </div>
+
+      <div class="card activity">
+        <div class="card-name">Forest Park</div>
+        <div class="card-tag">Outdoors · Free</div>
+        <p class="card-desc">Bigger than Central Park, and home to the Zoo, Art Museum, History Museum, and Science Center — all free.</p>
+        <a class="card-link" href="https://www.forestparkforever.org" target="_blank" rel="noopener">forestparkforever.org →</a>
+      </div>
+
+      <div class="card activity">
+        <div class="card-name">Ted Drewes Frozen Custard</div>
+        <div class="card-tag">Food · St. Louis Icon</div>
+        <p class="card-desc">A St. Louis institution since 1929 — famous for their thick "concrete" frozen custard. A must-visit on Chippewa, right near the party.</p>
+        <a class="card-link" href="https://www.teddrewes.com" target="_blank" rel="noopener">teddrewes.com →</a>
+      </div>
+
+      <div class="card activity">
+        <div class="card-name">Anheuser-Busch Brewery</div>
+        <div class="card-tag">Tour · Beer</div>
+        <p class="card-desc">Tour the iconic historic brewery and Clydesdale stables. Free beer samples at the end.</p>
+        <a class="card-link" href="https://www.budweisertours.com" target="_blank" rel="noopener">budweisertours.com →</a>
+      </div>
+
+      <div class="card activity">
+        <div class="card-name">The Delmar Loop</div>
+        <div class="card-tag">Neighborhood · Dining & Shopping</div>
+        <p class="card-desc">A lively stretch of independent restaurants, record shops, and live music venues. Great for a casual evening out.</p>
+        <a class="card-link" href="https://www.visittheloop.com" target="_blank" rel="noopener">visittheloop.com →</a>
+      </div>
+
+      <div class="card activity">
+        <div class="card-name">Soulard Neighborhood</div>
+        <div class="card-tag">Historic · Bars & Market</div>
+        <p class="card-desc">St. Louis's oldest neighborhood — home to the Saturday Farmers Market, blues bars, and French Creole architecture.</p>
+        <a class="card-link" href="https://www.soulard.org" target="_blank" rel="noopener">soulard.org →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>We can't wait to celebrate with you. ♡</p>
+    <br>
+    <p><strong>Emma & Jared</strong> · October 17th · 3–9 PM · St. Louis, MO</p>
+  </footer>
+
+</body>
+</html>
