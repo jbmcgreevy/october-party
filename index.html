@@ -27,49 +27,64 @@
 
     /* ── Hero ── */
     .hero {
-      background: linear-gradient(160deg, #ecdede 0%, #f7efe6 50%, #e8ede8 100%);
-      text-align: center;
-      padding: 80px 24px 60px;
       position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       overflow: hidden;
     }
 
-    .hero::before, .hero::after {
-      content: '✦';
+    .hero-bg {
       position: absolute;
-      font-size: 120px;
-      color: rgba(212, 165, 165, 0.15);
-      top: 20px;
+      inset: 0;
+      background-image: url('Emma%20%26%20Jared%20Eloped%202.jpg');
+      background-size: cover;
+      background-position: center 25%;
     }
-    .hero::before { left: -20px; }
-    .hero::after  { right: -20px; }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(30,20,20,0.55) 0%,
+        rgba(30,20,20,0.35) 50%,
+        rgba(30,20,20,0.65) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 80px 24px;
+      max-width: 680px;
+    }
 
     .hero .eyebrow {
-      font-family: 'Lato', sans-serif;
       font-weight: 300;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      font-size: 0.8rem;
-      color: var(--rose);
-      margin-bottom: 12px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 16px;
     }
 
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 8vw, 5rem);
-      color: var(--dark);
-      line-height: 1.15;
+      font-size: clamp(3rem, 10vw, 6rem);
+      color: #fff;
+      line-height: 1.1;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
     }
 
-    .hero h1 span {
-      color: var(--rose);
-    }
+    .hero h1 span { color: var(--blush); }
 
     .hero .subtitle {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: 1.2rem;
-      color: var(--light-text);
+      font-size: 1.25rem;
+      color: rgba(255,255,255,0.85);
       margin-top: 16px;
     }
 
@@ -78,23 +93,30 @@
       align-items: center;
       gap: 16px;
       justify-content: center;
-      margin: 32px auto;
-      max-width: 320px;
+      margin: 28px auto;
+      max-width: 280px;
     }
     .divider::before, .divider::after {
       content: '';
       flex: 1;
       height: 1px;
-      background: var(--blush);
+      background: rgba(255,255,255,0.35);
     }
     .divider span { color: var(--blush); font-size: 1.1rem; }
+
+    .hero-desc {
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      max-width: 440px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
 
     /* ── Details band ── */
     .details-band {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0;
       background: var(--rose);
       color: #fff;
     }
@@ -107,12 +129,12 @@
     }
     .detail-item:last-child { border-right: none; }
 
-    .detail-item .icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .detail-item .icon { font-size: 1.5rem; margin-bottom: 6px; }
     .detail-item .label {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      opacity: 0.8;
+      opacity: 0.75;
       margin-bottom: 4px;
     }
     .detail-item .value {
@@ -125,9 +147,73 @@
       text-underline-offset: 3px;
     }
 
-    /* ── Sections ── */
+    /* ── Photo gallery ── */
+    .gallery-section {
+      padding: 56px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .gallery-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 8px;
+    }
+
+    .gallery-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--dark);
+      margin-bottom: 32px;
+    }
+
+    .photo-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* Standard portrait photo slot */
+    .photo-slot {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .photo-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .photo-slot:hover img { transform: scale(1.03); }
+
+    /* Photo 3 is landscape but subjects are rotated — fix with CSS */
+    .photo-slot.rotated {
+      position: relative;
+      overflow: hidden;
+    }
+    .photo-slot.rotated img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      /* after rotate(90deg), landscape W×H becomes H×W visually.
+         Set element to H×W so rotated result fills the portrait slot. */
+      width: 133.33%;
+      height: 75%;
+      transform: translate(-50%, -50%) rotate(90deg);
+      object-fit: cover;
+    }
+
+    /* ── Content sections ── */
     .section {
-      max-width: 900px;
+      max-width: 960px;
       margin: 60px auto;
       padding: 0 24px;
     }
@@ -165,7 +251,7 @@
       box-shadow: 0 6px 20px rgba(58,46,46,0.12);
     }
 
-    .card .card-name {
+    .card-name {
       font-family: 'Playfair Display', serif;
       font-size: 1.15rem;
       font-weight: 700;
@@ -173,9 +259,9 @@
       margin-bottom: 4px;
     }
 
-    .card .card-tag {
+    .card-tag {
       display: inline-block;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       background: var(--cream);
@@ -186,12 +272,12 @@
       margin-bottom: 10px;
     }
 
-    .card .card-desc {
+    .card-desc {
       font-size: 0.9rem;
       color: var(--light-text);
     }
 
-    .card .card-link {
+    .card-link {
       display: inline-block;
       margin-top: 12px;
       font-size: 0.85rem;
@@ -200,12 +286,40 @@
       font-weight: 700;
       letter-spacing: 0.05em;
     }
-    .card .card-link:hover { text-decoration: underline; }
+    .card-link:hover { text-decoration: underline; }
 
-    /* ── Activities use accent color ── */
+    /* Activities */
     .card.activity { border-top-color: var(--sage); }
     .card.activity .card-tag { color: var(--sage); border-color: var(--sage); }
     .card.activity .card-link { color: var(--rose); }
+
+    /* Featured Ted Drewes card with photo */
+    .card.featured {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 0;
+      padding: 0;
+      overflow: hidden;
+      border-top-color: var(--sage);
+    }
+    .card.featured:hover { transform: translateY(-3px); }
+
+    .featured-photo {
+      width: 340px;
+      flex-shrink: 0;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .featured-body {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .featured-body .card-desc { font-size: 0.95rem; }
 
     /* ── Note box ── */
     .note {
@@ -215,7 +329,7 @@
       padding: 20px 24px;
       color: var(--light-text);
       font-style: italic;
-      margin-bottom: 40px;
+      margin-bottom: 32px;
     }
 
     /* ── Footer ── */
@@ -223,29 +337,49 @@
       background: var(--dark);
       color: rgba(255,255,255,0.6);
       text-align: center;
-      padding: 32px 24px;
+      padding: 36px 24px;
       font-size: 0.85rem;
     }
     footer strong { color: #fff; }
 
-    @media (max-width: 600px) {
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
       .detail-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
       .detail-item:last-child { border-bottom: none; }
+
+      .photo-strip { grid-template-columns: 1fr 1fr; }
+      .photo-strip .photo-slot:last-child { display: none; }
+
+      .card.featured { flex-direction: column; }
+      .featured-photo { width: 100%; height: 240px; }
+    }
+
+    @media (max-width: 480px) {
+      .photo-strip { grid-template-columns: 1fr; }
+      .photo-strip .photo-slot { aspect-ratio: 4/3; }
+      .photo-strip .photo-slot:last-child { display: block; }
+      .photo-slot.rotated img {
+        width: 75%;
+        height: 133.33%;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Hero -->
+  <!-- Hero — photo 2 (Gateway Arch window) as background -->
   <header class="hero">
-    <p class="eyebrow">You're invited to celebrate</p>
-    <h1>Emma <span>&</span> Jared</h1>
-    <p class="subtitle">We eloped — now let's party.</p>
-    <div class="divider"><span>♡</span></div>
-    <p style="color: var(--light-text); max-width: 480px; margin: 0 auto; font-size: 1rem;">
-      We snuck off and got married on March 6th, and we can't wait to celebrate
-      with all of you this fall in St. Louis!
-    </p>
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="eyebrow">You're invited to celebrate</p>
+      <h1>Emma <span>&</span> Jared</h1>
+      <p class="subtitle">We eloped — now let's party.</p>
+      <div class="divider"><span>♡</span></div>
+      <p class="hero-desc">
+        We snuck off and got married on March 6th, and we can't wait to
+        celebrate with all of you this fall in St. Louis!
+      </p>
+    </div>
   </header>
 
   <!-- Details band -->
@@ -271,6 +405,23 @@
     </div>
   </div>
 
+  <!-- Photo gallery -->
+  <div class="gallery-section">
+    <p class="gallery-eyebrow">March 6th, 2026</p>
+    <h2 class="gallery-title">The day we snuck away</h2>
+    <div class="photo-strip">
+      <div class="photo-slot">
+        <img src="Emma%20%26%20Jared%20Eloped%201.jpg" alt="Emma and Jared on their wedding day">
+      </div>
+      <div class="photo-slot rotated">
+        <img src="Emma%20%26%20Jared%20Eloped%203jpg.jpg" alt="Emma and Jared kissing with bouquet">
+      </div>
+      <div class="photo-slot">
+        <img src="Emma%20%26%20Jared%20Eloped%204.jpg" alt="Emma and Jared holding hands">
+      </div>
+    </div>
+  </div>
+
   <!-- Hotels -->
   <section class="section">
     <h2 class="section-title">Places to Stay</h2>
@@ -279,45 +430,31 @@
     <div class="card-grid">
 
       <div class="card">
-        <div class="card-name">The Cheshire</div>
-        <div class="card-tag">Boutique · Clayton</div>
-        <p class="card-desc">A charming English-inspired boutique hotel in the upscale Clayton neighborhood, about 15 min from the party.</p>
-        <a class="card-link" href="https://www.thecheshirestl.com" target="_blank" rel="noopener">cheshirestl.com →</a>
-      </div>
-
-      <div class="card">
-        <div class="card-name">Moonrise Hotel</div>
-        <div class="card-tag">Boutique · The Loop</div>
-        <p class="card-desc">A funky, moon-themed hotel in the lively Delmar Loop area. Great walkable dining and nightlife nearby.</p>
-        <a class="card-link" href="https://www.moonrisehotel.com" target="_blank" rel="noopener">moonrisehotel.com →</a>
-      </div>
-
-      <div class="card">
-        <div class="card-name">Angad Arts Hotel</div>
-        <div class="card-tag">Boutique · Grand Center</div>
-        <p class="card-desc">A colorful, arts-district hotel where each floor has its own mood. Unique and memorable stay.</p>
-        <a class="card-link" href="https://www.angadartshotel.com" target="_blank" rel="noopener">angadartshotel.com →</a>
-      </div>
-
-      <div class="card">
         <div class="card-name">21c Museum Hotel</div>
         <div class="card-tag">Art Hotel · Downtown</div>
-        <p class="card-desc">A contemporary art museum and hotel in one. Stunning installations throughout and a great restaurant on-site.</p>
+        <p class="card-desc">A contemporary art museum and boutique hotel in one. Stunning installations throughout, and a great restaurant on-site. A unique St. Louis experience.</p>
         <a class="card-link" href="https://www.21cmuseumhotels.com/stlouis" target="_blank" rel="noopener">21cmuseumhotels.com →</a>
       </div>
 
       <div class="card">
-        <div class="card-name">Marriott St. Louis Grand</div>
+        <div class="card-name">Royal Sonesta St. Louis</div>
         <div class="card-tag">Full-Service · Downtown</div>
-        <p class="card-desc">A classic full-service downtown hotel, steps from the Gateway Arch and plenty of dining options.</p>
-        <a class="card-link" href="https://www.marriott.com" target="_blank" rel="noopener">marriott.com →</a>
+        <p class="card-desc">A polished, full-service hotel in the heart of downtown, close to the Gateway Arch and walkable to great dining. Reliable comfort and style.</p>
+        <a class="card-link" href="https://www.sonesta.com/royal-sonesta/mo/st-louis" target="_blank" rel="noopener">sonesta.com →</a>
       </div>
 
       <div class="card">
-        <div class="card-name">Drury Inn – Convention Center</div>
-        <div class="card-tag">Value · Downtown</div>
-        <p class="card-desc">A reliably comfortable mid-range option downtown. Includes free hot breakfast and evening snacks — a great deal.</p>
-        <a class="card-link" href="https://www.druryhotels.com" target="_blank" rel="noopener">druryhotels.com →</a>
+        <div class="card-name">Lodge at Grant's Trail</div>
+        <div class="card-tag">Relaxed · South County</div>
+        <p class="card-desc">A peaceful, nature-adjacent lodge near the Grant's Trail greenway. A great pick if you want something quiet and away from the bustle of downtown.</p>
+        <a class="card-link" href="https://www.lodgeatgrantstrail.com" target="_blank" rel="noopener">lodgeatgrantstrail.com →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-name">Gothic Heights Inn</div>
+        <div class="card-tag">Boutique B&B · Tower Grove</div>
+        <p class="card-desc">A charming boutique inn right in the Tower Grove neighborhood — walkable to the party venue, the Botanical Garden, and some of the best restaurants in St. Louis.</p>
+        <a class="card-link" href="https://www.gothicheightsinn.com" target="_blank" rel="noopener">gothicheightsinn.com →</a>
       </div>
 
     </div>
@@ -370,13 +507,6 @@
       </div>
 
       <div class="card activity">
-        <div class="card-name">Ted Drewes Frozen Custard</div>
-        <div class="card-tag">Food · St. Louis Icon</div>
-        <p class="card-desc">A St. Louis institution since 1929 — famous for their thick "concrete" frozen custard. A must-visit on Chippewa, right near the party.</p>
-        <a class="card-link" href="https://www.teddrewes.com" target="_blank" rel="noopener">teddrewes.com →</a>
-      </div>
-
-      <div class="card activity">
         <div class="card-name">Anheuser-Busch Brewery</div>
         <div class="card-tag">Tour · Beer</div>
         <p class="card-desc">Tour the iconic historic brewery and Clydesdale stables. Free beer samples at the end.</p>
@@ -395,6 +525,25 @@
         <div class="card-tag">Historic · Bars & Market</div>
         <p class="card-desc">St. Louis's oldest neighborhood — home to the Saturday Farmers Market, blues bars, and French Creole architecture.</p>
         <a class="card-link" href="https://www.soulard.org" target="_blank" rel="noopener">soulard.org →</a>
+      </div>
+
+      <!-- Featured: Ted Drewes with wedding photo -->
+      <div class="card activity featured">
+        <img
+          class="featured-photo"
+          src="Emma%20%26%20Jared%20Eloped%205.jpg"
+          alt="Emma and Jared kissing in their wedding clothes at Ted Drewes"
+        >
+        <div class="featured-body">
+          <div class="card-name">Ted Drewes Frozen Custard</div>
+          <div class="card-tag">Food · St. Louis Icon</div>
+          <p class="card-desc">
+            A St. Louis institution since 1929, famous for their impossibly thick "concrete" frozen custard.
+            Right on Chippewa, just around the corner from the party — and yes, we stopped here
+            on our wedding day. You should too.
+          </p>
+          <a class="card-link" href="https://www.teddrewes.com" target="_blank" rel="noopener">teddrewes.com →</a>
+        </div>
       </div>
 
     </div>
