@@ -369,12 +369,54 @@
     footer p { font-size: 0.85rem; opacity: 0.65; }
     footer strong { color: var(--cream); opacity: 1; }
 
+    /* ── Back to top ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--brown);
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      border-radius: 6px;
+      opacity: 0.85;
+      transition: opacity 0.15s;
+      z-index: 99;
+    }
+    .back-to-top:hover { opacity: 1; }
+
+    /* ── Sticky nav ── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--brown);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      padding: 0 16px;
+    }
+    .site-nav a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 14px 18px;
+      opacity: 0.65;
+      transition: opacity 0.15s;
+    }
+    .site-nav a:hover { opacity: 1; }
+
     /* ── Responsive ── */
     @media (max-width: 700px) {
       .detail-item { border-right: none; border-bottom: 1px solid rgba(240,230,200,0.15); }
       .detail-item:last-child { border-bottom: none; }
       .photo-strip { grid-template-columns: 1fr 1fr; }
-      .photo-strip .photo-slot:last-child { display: none; }
       .card.featured { flex-direction: column; }
       .featured-photo { width: 100%; height: 240px; }
       .footer-icons { gap: 20px; }
@@ -383,12 +425,21 @@
     @media (max-width: 480px) {
       .photo-strip { grid-template-columns: 1fr; }
       .photo-strip .photo-slot { aspect-ratio: 4/3; }
-      .photo-strip .photo-slot:last-child { display: block; }
+
       .photo-slot.rotated img { width: 75%; height: 133.33%; }
     }
   </style>
 </head>
 <body>
+
+  <a class="back-to-top" href="#">↑ Top</a>
+
+  <nav class="site-nav">
+    <a href="#hotels">Hotels</a>
+    <a href="#things-to-do">Things to Do</a>
+    <a href="#faq">FAQ</a>
+    <a href="#photos">Photos</a>
+  </nav>
 
   <!-- Hero -->
   <header class="hero">
@@ -440,25 +491,48 @@
     </div>
   </div>
 
-  <!-- Photo gallery -->
-  <div class="gallery-section">
-    <p class="gallery-eyebrow">March 6th, 2026</p>
-    <h2 class="gallery-title">A few from the day</h2>
-    <div class="photo-strip">
-      <div class="photo-slot">
-        <img src="Emma%20%26%20Jared%20Eloped%201.jpg" alt="Emma and Jared on their wedding day">
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <h2 class="section-title">FAQ</h2>
+    <p class="section-subtitle">A few things that might be useful to know.</p>
+
+    <div class="faq-list">
+
+      <div class="faq-item" id="faq-attire">
+        <p class="faq-q">What does "Vintage Casual" mean?</p>
+        <p class="faq-a">Wear something vintage that you love — that's really all it means. We went full 1970s, but any era goes. Thrifted, inherited, or just something with a retro feel. No need to overthink it, and definitely no need to go out and buy anything new.</p>
       </div>
-      <div class="photo-slot">
-        <img src="Emma%20%26%20Jared%20Eloped%203jpg.jpg" alt="Emma and Jared kissing with bouquet">
+
+      <div class="faq-item">
+        <p class="faq-q">Will there be food?</p>
+        <p class="faq-a">Yes! We'll have hors d'oeuvres, catered BBQ, and drinks, with vegan and vegetarian options available.</p>
       </div>
-      <div class="photo-slot">
-        <img src="Emma%20%26%20Jared%20Eloped%204.jpg" alt="Emma and Jared holding hands">
+
+      <div class="faq-item">
+        <p class="faq-q">Where should I park?</p>
+        <p class="faq-a">Blow Street is a small one-way street with very limited parking, so we recommend leaving the car a block or two away. <strong>Gresham Ave</strong> and <strong>Loughborough Ave</strong> are both great options with easy street parking.</p>
       </div>
+
+      <div class="faq-item">
+        <p class="faq-q">Can I bring a plus one?</p>
+        <p class="faq-a">Please reach out to <a href="mailto:jaredbmcgreevy@gmail.com">jaredbmcgreevy@gmail.com</a> and let us know — we'd love to make sure we have a headcount!</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">What if I can't make it?</p>
+        <p class="faq-a">We'll miss you! Just shoot us an email at <a href="mailto:jaredbmcgreevy@gmail.com">jaredbmcgreevy@gmail.com</a> so we know not to expect you.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">Do you have a registry?</p>
+        <p class="faq-a">We don't have a registry — your presence at the party is more than enough. We're just excited to celebrate with you!</p>
+      </div>
+
     </div>
-  </div>
+  </section>
 
   <!-- Hotels -->
-  <section class="section">
+  <section class="section" id="hotels">
     <h2 class="section-title">Places to Stay</h2>
     <p class="section-subtitle">Some great hotel options around St. Louis for out-of-town guests.</p>
 
@@ -510,7 +584,7 @@
   </section>
 
   <!-- Things to Do -->
-  <section class="section">
+  <section class="section" id="things-to-do">
     <h2 class="section-title">Things to Do in St. Louis</h2>
     <p class="section-subtitle">Make a weekend of it — there's plenty to explore before or after the party.</p>
 
@@ -643,45 +717,40 @@
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="section">
-    <h2 class="section-title">FAQ</h2>
-    <p class="section-subtitle">A few things that might be useful to know.</p>
-
-    <div class="faq-list">
-
-      <div class="faq-item" id="faq-attire">
-        <p class="faq-q">What does "Vintage Casual" mean?</p>
-        <p class="faq-a">Wear something vintage that you love — that's really all it means. We went full 1970s, but any era goes. Thrifted, inherited, or just something with a retro feel. No need to overthink it, and definitely no need to go out and buy anything new.</p>
+  <!-- Photos -->
+  <div class="gallery-section" id="photos">
+    <p class="gallery-eyebrow">March 6th, 2026</p>
+    <h2 class="gallery-title">A few from the day</h2>
+    <div class="photo-strip">
+      <div class="photo-slot">
+        <img src="Emma%20%26%20Jared%20Eloped%201.jpg" alt="Emma and Jared on their wedding day">
       </div>
-
-      <div class="faq-item">
-        <p class="faq-q">Will there be food?</p>
-        <p class="faq-a">Yes! We'll have hors d'oeuvres, catered BBQ, and drinks, with vegan and vegetarian options available.</p>
+      <div class="photo-slot">
+        <img src="Emma%20%26%20Jared%20Eloped%203jpg.jpg" alt="Emma and Jared kissing with bouquet">
       </div>
-
-      <div class="faq-item">
-        <p class="faq-q">Where should I park?</p>
-        <p class="faq-a">Blow Street is a small one-way street with very limited parking, so we recommend leaving the car a block or two away. <strong>Gresham Ave</strong> and <strong>Loughborough Ave</strong> are both great options with easy street parking.</p>
+      <div class="photo-slot">
+        <img src="Emma%20%26%20Jared%20Eloped%204.jpg" alt="Emma and Jared holding hands">
       </div>
-
-      <div class="faq-item">
-        <p class="faq-q">Can I bring a plus one?</p>
-        <p class="faq-a">Please reach out to <a href="mailto:jaredbmcgreevy@gmail.com">jaredbmcgreevy@gmail.com</a> and let us know — we'd love to make sure we have a headcount!</p>
+      <div class="photo-slot">
+        <img src="emma%20and%20jared%20eloped%206.jpg" alt="Emma and Jared">
       </div>
-
-      <div class="faq-item">
-        <p class="faq-q">What if I can't make it?</p>
-        <p class="faq-a">We'll miss you! Just shoot us an email at <a href="mailto:jaredbmcgreevy@gmail.com">jaredbmcgreevy@gmail.com</a> so we know not to expect you.</p>
+      <div class="photo-slot">
+        <img src="emma%20and%20jared%20eloped%207.jpg" alt="Emma and Jared">
       </div>
-
-      <div class="faq-item">
-        <p class="faq-q">Do you have a registry?</p>
-        <p class="faq-a">We don't have a registry — your presence at the party is more than enough. We're just excited to celebrate with you!</p>
+      <div class="photo-slot">
+        <img src="emma%20and%20jared%20eloped%208.jpg" alt="Emma and Jared">
       </div>
-
+      <div class="photo-slot">
+        <img src="emma%20and%20jared%20eloped%209.jpg" alt="Emma and Jared">
+      </div>
+      <div class="photo-slot">
+        <img src="emma%20and%20jared%20eloped%2010.jpg" alt="Emma and Jared">
+      </div>
+      <div class="photo-slot">
+        <img src="emma%20and%20jared%20eloped%2011.jpg" alt="Emma and Jared">
+      </div>
     </div>
-  </section>
+  </div>
 
   <footer>
     <div class="footer-icons">
