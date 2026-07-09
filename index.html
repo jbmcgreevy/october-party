@@ -396,7 +396,7 @@
       background: var(--brown);
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       gap: 0;
       padding: 0 16px;
     }
@@ -420,6 +420,7 @@
       .card.featured { flex-direction: column; }
       .featured-photo { width: 100%; height: 240px; }
       .footer-icons { gap: 20px; }
+      .site-nav a { flex: 1; text-align: center; padding: 14px 4px; letter-spacing: 0.08em; font-size: 0.6rem; }
     }
 
     @media (max-width: 480px) {
@@ -808,7 +809,7 @@
         <img src="emma%20and%20jared%20eloped%2010.jpg" alt="Emma and Jared">
       </div>
       <div class="photo-slot">
-        <img src="emma%20and%20jared%20eloped%2011.jpg" alt="Emma and Jared">
+        <img src="emma%20and%20jared%20eloped%2011.jpg" alt="Emma and Jared" style="object-position: center 60%;">
       </div>
     </div>
   </div>
