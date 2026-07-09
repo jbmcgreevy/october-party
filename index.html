@@ -432,6 +432,66 @@
 </head>
 <body>
 
+  <!-- Password gate -->
+  <div id="password-gate" style="
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--brown);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 20px;
+    padding: 24px;
+  ">
+    <h1 style="font-family: 'Lilita One', serif; color: var(--cream); font-size: clamp(2rem, 8vw, 3.5rem);">Emma <span style="color: rgba(240,230,200,0.6);">&amp;</span> Jared</h1>
+    <form id="password-form" style="display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 300px;">
+      <input
+        id="password-input"
+        type="password"
+        placeholder="Password"
+        autocomplete="current-password"
+        style="
+          width: 100%; padding: 12px 16px;
+          border: 2px solid rgba(240,230,200,0.4); border-radius: 8px;
+          background: rgba(255,255,255,0.08); color: var(--cream);
+          font-family: 'Jost', sans-serif; font-size: 1rem;
+          outline: none; text-align: center; letter-spacing: 0.05em;
+        "
+      >
+      <p id="password-error" style="color: rgba(240,230,200,0.55); font-size: 0.85rem; min-height: 1.2em;"></p>
+      <button type="submit" style="
+        background: var(--cream); color: var(--brown);
+        border: none; border-radius: 8px;
+        font-family: 'Jost', sans-serif; font-weight: 700;
+        font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase;
+        padding: 12px 32px; cursor: pointer; width: 100%;
+      ">Enter</button>
+    </form>
+  </div>
+
+  <script>
+    (function () {
+      var gate = document.getElementById('password-gate');
+      var form = document.getElementById('password-form');
+      var input = document.getElementById('password-input');
+      var error = document.getElementById('password-error');
+
+      if (sessionStorage.getItem('ej_auth') === '1') {
+        gate.style.display = 'none';
+        return;
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (input.value.trim().toLowerCase() === 'humboldt') {
+          sessionStorage.setItem('ej_auth', '1');
+          gate.style.display = 'none';
+        } else {
+          error.textContent = 'Incorrect password — try again.';
+          input.value = '';
+          input.focus();
+        }
+      });
+    })();
+  </script>
+
   <a class="back-to-top" href="#">↑ Top</a>
 
   <nav class="site-nav">
@@ -450,8 +510,9 @@
       <p class="subtitle">We eloped — now let's party.</p>
       <div class="divider"><span>♡</span></div>
       <p class="hero-desc">
-        We got married on March 6th, and we can't wait to
-        celebrate with all of you this fall in St. Louis!
+        We got married on March 6th, and we're celebrating
+        10 years together — we can't wait to see you all
+        this fall in St. Louis!
       </p>
     </div>
   </header>
@@ -473,7 +534,7 @@
       <div class="label">Location</div>
       <div class="value">
         <a href="https://maps.google.com/?q=6411+Blow+Street,+St.+Louis+MO+63109" target="_blank" rel="noopener">
-          Blow Street<br>St. Louis, MO 63109
+          6411 Blow Street<br>St. Louis, MO 63109
         </a>
       </div>
     </div>
@@ -549,7 +610,7 @@
         <div class="card-name">Royal Sonesta St. Louis</div>
         <div class="card-tag">Full-Service · Downtown</div>
         <p class="card-desc">A polished, full-service hotel in the heart of downtown, close to the Gateway Arch and walkable to great dining. Reliable comfort and style.</p>
-        <a class="card-link" href="https://www.sonesta.com/royal-sonesta/mo/st-louis" target="_blank" rel="noopener">sonesta.com →</a>
+        <a class="card-link" href="https://www.sonesta.com/royal-sonesta/mo/st-louis/chase-park-plaza-royal-sonesta-st-louis" target="_blank" rel="noopener">sonesta.com →</a>
       </div>
 
       <div class="card">
@@ -560,17 +621,17 @@
       </div>
 
       <div class="card">
-        <div class="card-name">Gothic Heights Inn</div>
-        <div class="card-tag">Boutique B&amp;B · Tower Grove</div>
-        <p class="card-desc">A charming boutique inn right in the Tower Grove neighborhood — walkable to the party venue, the Botanical Garden, and some of the best restaurants in St. Louis.</p>
-        <a class="card-link" href="https://www.gothicheightsinn.com" target="_blank" rel="noopener">gothicheightsinn.com →</a>
+        <div class="card-name">Hilton Pennywell St. Louis at the Arch</div>
+        <div class="card-tag">Full-Service · Downtown</div>
+        <p class="card-desc">A sleek, modern Hilton steps from the Gateway Arch and the Mississippi riverfront. Great views, full amenities, and a prime downtown location.</p>
+        <a class="card-link" href="https://www.hilton.com/en/hotels/stlddhf-hilton-pennywell-st-louis-at-the-arch" target="_blank" rel="noopener">hilton.com →</a>
       </div>
 
       <div class="card">
-        <div class="card-name">Chase Park Plaza</div>
-        <div class="card-tag">Historic · Central West End</div>
-        <p class="card-desc">A St. Louis landmark since 1922, this grand hotel sits in the heart of the Central West End with beautiful rooms, multiple restaurants, and a rooftop pool.</p>
-        <a class="card-link" href="https://www.chaseparkplaza.com" target="_blank" rel="noopener">chaseparkplaza.com →</a>
+        <div class="card-name">Hampton Inn &amp; Suites St. Louis at Forest Park</div>
+        <div class="card-tag">Hampton Inn · Central West End</div>
+        <p class="card-desc">A comfortable, well-located Hampton Inn right on the edge of Forest Park — walkable to the Zoo, Art Museum, and some of the best dining in the city.</p>
+        <a class="card-link" href="https://www.hilton.com/en/hotels/stlhlhx-hampton-suites-st-louis-at-forest-park/" target="_blank" rel="noopener">hilton.com →</a>
       </div>
 
       <div class="card">
@@ -619,14 +680,14 @@
         <div class="card-name">St. Louis Zoo</div>
         <div class="card-tag">Family · Free Admission</div>
         <p class="card-desc">One of the best free zoos in the country, located in Forest Park. A full day's worth of wildlife to explore.</p>
-        <a class="card-link" href="https://www.stlzoo.org" target="_blank" rel="noopener">stlzoo.org →</a>
+        <a class="card-link" href="https://stlzoo.org" target="_blank" rel="noopener">stlzoo.org →</a>
       </div>
 
       <div class="card">
         <div class="card-name">Forest Park</div>
         <div class="card-tag">Outdoors · Free</div>
         <p class="card-desc">Bigger than Central Park, and home to the Zoo, Art Museum, History Museum, and Science Center — all free.</p>
-        <a class="card-link" href="https://www.forestparkforever.org" target="_blank" rel="noopener">forestparkforever.org →</a>
+        <a class="card-link" href="https://www.forestparkforever.org/park-attractions" target="_blank" rel="noopener">forestparkforever.org →</a>
       </div>
 
       <div class="card">
@@ -678,7 +739,7 @@
         <div class="card-name">Mastodon State Historic Site</div>
         <div class="card-tag">History · South of the city</div>
         <p class="card-desc">The site of one of the earliest known human-mastodon encounters in North America. A fascinating museum and nature trails just a short drive from St. Louis.</p>
-        <a class="card-link" href="https://mostateparks.com/park/mastodon-state-historic-site" target="_blank" rel="noopener">mostateparks.com →</a>
+        <a class="card-link" href="https://mostateparks.com/historic-site/mastodon-state-historic-site" target="_blank" rel="noopener">mostateparks.com →</a>
       </div>
 
       <div class="card">
